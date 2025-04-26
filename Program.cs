@@ -1,29 +1,44 @@
 using MongoDB.Driver;
 using MongoDB.Bson;
+using UniShare.Services ;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<MongoDbService>();
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
-var mongoClient = new MongoClient("mongodb+srv://testminhaj:yzsKdGz9zfWwhNu8@owncluster.4skch.mongodb.net/?retryWrites=true&w=majority&appName=OwnCluster");
-var database = mongoClient.GetDatabase("unishare");
+app.UseAuthorization();
+app.MapControllers();
 
-app.MapGet("/", async () =>
-{
-    try
-    {
-        var collection = database.GetCollection<BsonDocument>("courses");
-        var documents = await collection.Find(new BsonDocument()).ToListAsync();
+// app.MapGet("/", async () =>
+// {
+//     try
+//     {
+//         var collection = database.GetCollection<BsonDocument>("courses");
+//         var documents = await collection.Find(new BsonDocument()).ToListAsync();
 
-        // Convert all BsonDocuments to clean JSON objects
-        var jsonList = documents.Select(doc => BsonTypeMapper.MapToDotNetValue(doc)).ToList();
+//         var jsonList = documents.Select(doc =>
+//         {
+//             // Convert the BsonDocument to a Dictionary for manipulation
+//             var dict = doc.ToDictionary();
 
-        return Results.Json(new { courses = jsonList });
-    }
-    catch (Exception ex)
-    {
-        return Results.Json(new { error = ex.Message }, statusCode: 500);
-    }
-});
+//             // Convert _id from ObjectId to string
+//             if (dict.ContainsKey("_id") && dict["_id"] is ObjectId oid)
+//             {
+//                 dict["_id"] = oid.ToString();
+//             }
+
+//             return dict;
+//         }).ToList();
+
+//         return Results.Json(new { courses = jsonList });
+//     }
+//     catch (Exception ex)
+//     {
+//         return Results.Json(new { error = ex.Message }, statusCode: 500);
+//     }
+// });
 
 app.Run();
 
