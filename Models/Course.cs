@@ -1,36 +1,44 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace UniShare.Models
 {
+    [BsonIgnoreExtraElements]
     public class Course
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = string.Empty;
+        [BsonElement("_id"), BsonRepresentation(BsonType.ObjectId)]
+        [JsonIgnore]
+        public string? Id { get; set; }
+        [JsonPropertyName("_id")]
+        public string? _id => Id;
 
         [BsonElement("courseName")]
-        public string CourseName { get; set; } = string.Empty;
+        public string? CourseName { get; set; }
 
         [BsonElement("section")]
-        public string Section { get; set; } = string.Empty;
+        public string? Section { get; set; }
 
         [BsonElement("semester")]
         public int Semester { get; set; }
 
         [BsonElement("courseCode")]
-        public string CourseCode { get; set; } = "Not Provided";
+        public string? CourseCode { get; set; } = "Not Provided";
 
         [BsonElement("faculty")]
-        public string Faculty { get; set; } = string.Empty;
+        public string? Faculty { get; set; }
 
         [BsonElement("assignments")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public List<string> Assignments { get; set; } = new List<string>();
 
         [BsonElement("labs")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public List<string> Labs { get; set; } = new List<string>();
 
         [BsonElement("notes")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public List<string> Notes { get; set; } = new List<string>();
 
         [BsonElement("notices")]
@@ -40,10 +48,10 @@ namespace UniShare.Models
     public class Notice
     {
         [BsonElement("email")]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; }
 
         [BsonElement("notice")]
-        public string NoticeText { get; set; } = string.Empty;
+        public string? NoticeText { get; set; }
 
         [BsonElement("date")]
         public DateTime Date { get; set; } = DateTime.UtcNow;
