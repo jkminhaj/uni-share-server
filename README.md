@@ -1,8 +1,8 @@
-# 📚 Course Management API
+#  Course Management API
 
 This API provides functionality for managing Courses, Assignments, Labs, and Notes in an academic setting.
 
-## 🌐 Base URLs
+##  Base URLs
 
 - **Courses:** `/api/courses`
 - **Assignments:** `/api/assignments`
@@ -11,7 +11,7 @@ This API provides functionality for managing Courses, Assignments, Labs, and Not
 
 ---
 
-## 📘 Courses
+##  Courses
 
 ### ➕ Create Course
 
@@ -38,21 +38,21 @@ This API provides functionality for managing Courses, Assignments, Labs, and Not
 }
 ```
 
-### 📄 Get Course by ID
+### Get Course by ID
 
 **GET** `/api/courses/get_course/{id}`
 
-### 📋 Get All Courses
+### Get All Courses
 
 **GET** `/api/courses/get_all_courses`
 
-### ❌ Delete Course
+### Delete Course
 
 **DELETE** `/api/courses/delete/{id}`
 
 ---
 
-## 📝 Assignments
+## Assignments
 
 ### ➕ Create Assignment
 
@@ -75,25 +75,25 @@ This API provides functionality for managing Courses, Assignments, Labs, and Not
 }
 ```
 
-### 📄 Get Assignments by Course
+### Get Assignments by Course
 
 **GET** `/api/assignments/get_assignments/{courseId}`
 
-### 📌 Get Specific Assignment
+### Get Specific Assignment
 
 **GET** `/api/assignments/get_assignment/{assignmentId}`
 
-### 🔄 Update Assignment
+### Update Assignment
 
 **PUT** `/api/assignments/update_assignment/{assignmentId}`
 
-### ❌ Delete Assignment
+### Delete Assignment
 
 **DELETE** `/api/assignments/delete/{courseId}/{assignmentId}`
 
 ---
 
-## 🧪 Labs
+## Labs
 
 ### ➕ Create Lab
 
@@ -119,27 +119,27 @@ This API provides functionality for managing Courses, Assignments, Labs, and Not
 }
 ```
 
-### 📄 Get Labs by Course
+### Get Labs by Course
 
 **GET** `/api/labs/get_labs/{courseId}`
 
-### 📌 Get Specific Lab
+### Get Specific Lab
 
 **GET** `/api/labs/get_lab/{labId}`
 
-### 🔄 Update Lab
+### Update Lab
 
 **PUT** `/api/labs/update_lab/{labId}`
 
-### ❌ Delete Lab
+### Delete Lab
 
 **DELETE** `/api/labs/delete/{courseId}/{labId}`
 
 ---
 
-## 📚 Notes
+## Notes
 
-### ➕ Create Note
+### Create Note
 
 **POST** `/api/notes/create`
 
@@ -162,19 +162,19 @@ This API provides functionality for managing Courses, Assignments, Labs, and Not
 }
 ```
 
-### 📄 Get Notes by Course
+### Get Notes by Course
 
 **GET** `/api/notes/get_notes/{courseId}`
 
-### 📌 Get Specific Note
+### Get Specific Note
 
 **GET** `/api/notes/get_note/{noteId}`
 
-### 🔄 Update Note
+### Update Note
 
 **PUT** `/api/notes/update_note/{noteId}`
 
-### ❌ Delete Note
+### Delete Note
 
 **DELETE** `/api/notes/delete/{courseId}/{noteId}`
 
