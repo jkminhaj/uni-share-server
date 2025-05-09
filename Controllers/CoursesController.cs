@@ -48,6 +48,19 @@ namespace UniShare.Controllers
             return Ok(new { courses });
         }
 
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteCourse(string id)
+        {
+            var deleteResult = await _courses.DeleteOneAsync(c => c.Id == id);
+
+            if (deleteResult.DeletedCount == 0)
+            {
+                return NotFound(new { error = "Course not found" });
+            }
+
+            return Ok(new { message = "Course deleted successfully" });
+        }
+
         [HttpPost("add_notice/{id}")]
         public async Task<IActionResult> AddNotice(string id, [FromBody] Notice notice)
         {

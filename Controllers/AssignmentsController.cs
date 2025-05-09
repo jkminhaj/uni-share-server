@@ -20,21 +20,49 @@ namespace UniShare.Controllers
         }
 
         // POST: api/assignments/create
+        // [HttpPost("create")]
+        // public async Task<IActionResult> CreateAssignment([FromBody] Assignment assignment)
+        // {
+        //     if (assignment == null || string.IsNullOrEmpty(assignment.CourseId))
+        //         return BadRequest("Invalid assignment data.");
+
+        //     await _assignments.InsertOneAsync(assignment);
+
+        //     // Update the course to push the new assignment ID
+        //     var filter = Builders<Course>.Filter.Eq(c => c.Id, assignment.CourseId);
+        //     var update = Builders<Course>.Update.Push(c => c.Assignments, assignment.Id);
+        //     await _courses.UpdateOneAsync(filter, update);
+
+        //     return Ok(new { message = "Assignment created successfully", assignment });
+        // }
         [HttpPost("create")]
         public async Task<IActionResult> CreateAssignment([FromBody] Assignment assignment)
         {
             if (assignment == null || string.IsNullOrEmpty(assignment.CourseId))
                 return BadRequest("Invalid assignment data.");
 
+            // Manually generate the ObjectId and set creation time
+            assignment.Id = ObjectId.GenerateNewId().ToString();
+            assignment.CreatedAt = DateTime.UtcNow;
+
+            // Insert the assignment into the database
             await _assignments.InsertOneAsync(assignment);
 
-            // Update the course to push the new assignment ID
-            var filter = Builders<Course>.Filter.Eq(c => c.Id, assignment.CourseId);
-            var update = Builders<Course>.Update.Push(c => c.Assignments, assignment.Id);
-            await _courses.UpdateOneAsync(filter, update);
+            // Update the Course document to include this new assignment's ID
+            var courseFilter = Builders<Course>.Filter.Eq(c => c.Id, assignment.CourseId);
+            var courseUpdate = Builders<Course>.Update.Push(c => c.Assignments, assignment.Id);
+            var updateResult = await _courses.UpdateOneAsync(courseFilter, courseUpdate);
 
-            return Ok(new { message = "Assignment created successfully", assignment });
+            if (updateResult.ModifiedCount == 0)
+                return NotFound($"Course with ID '{assignment.CourseId}' not found.");
+
+            return Ok(new
+            {
+                message = "Assignment created successfully",
+                assignment
+            });
         }
+
 
         // GET: api/assignments/get_assignments/{courseId}
         [HttpGet("get_assignments/{courseId}")]
@@ -64,6 +92,19 @@ namespace UniShare.Controllers
 
             return Ok(new { message = "Assignment updated successfully" });
         }
+
+        // GET: api/assignments/{assignmentId}
+        [HttpGet("{assignmentId}")]
+        public async Task<IActionResult> GetAssignment(string assignmentId)
+        {
+            var assignment = await _assignments.Find(a => a.Id == assignmentId).FirstOrDefaultAsync();
+
+            if (assignment == null)
+                return NotFound(new { error = "Assignment not found" });
+
+            return Ok(assignment);
+        }
+
 
         // DELETE: api/assignments/delete/{courseId}/{assignmentId}
         [HttpDelete("delete/{courseId}/{assignmentId}")]

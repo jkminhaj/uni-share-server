@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UniShareApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a6a79480a2b7cb6d86480346491bfb7961f57e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b3d32497bfe9f9924a53e67d5c41bcbf656c462")]
 [assembly: System.Reflection.AssemblyProductAttribute("UniShareApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UniShareApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -34,6 +34,7 @@ namespace UniShare.Models
         [BsonElement("uploader")]  // Maps to uploader field in MongoDB document
         public Uploader? Uploader { get; set; }
 
+        
         [BsonElement("course")]  // References the course this assignment belongs to (ObjectId)
         [BsonRepresentation(BsonType.ObjectId)]
         public string? CourseId { get; set; }
