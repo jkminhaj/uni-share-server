@@ -41,6 +41,7 @@ namespace UniShare.Controllers
 
             return Ok(course);
         }
+        
         [HttpGet("get_all_courses")]
         public async Task<IActionResult> GetAllCourses()
         {

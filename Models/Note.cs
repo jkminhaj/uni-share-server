@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
+using UniShare.Models ;
 
 namespace UniShare.Models
 {
@@ -26,7 +27,7 @@ namespace UniShare.Models
 
         [JsonPropertyName("uploader")]
         [BsonElement("uploader")]
-        public NoteUploader? NoteUploader { get; set; }
+        public Uploader? Uploader { get; set; }
 
         [BsonElement("course")]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -34,16 +35,5 @@ namespace UniShare.Models
 
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    }
-    public class NoteUploader
-    {
-        [BsonElement("name")]
-        public string? Name { get; set; }
-
-        [BsonElement("email")]
-        public string? Email { get; set; }
-
-        [BsonElement("image")]
-        public string? Image { get; set; }
     }
 }

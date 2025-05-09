@@ -19,7 +19,6 @@ namespace UniShare.Controllers
             _courses = mongoDbService.GetCollection<Course>("courses");
         }
 
-        // POST: api/labs/create
         [HttpPost("create")]
         public async Task<IActionResult> CreateLab([FromBody] Lab lab)
         {
@@ -45,7 +44,6 @@ namespace UniShare.Controllers
             });
         }
 
-        // GET: {courseId}
         [HttpGet("get_labs/{courseId}")]
         public async Task<IActionResult> GetLabs(string courseId)
         {
@@ -53,7 +51,6 @@ namespace UniShare.Controllers
             return Ok(new { labs });
         }
 
-        // GET: api/labs/{labId}
         [HttpGet("{labId}")]
         public async Task<IActionResult> GetLab(string labId)
         {
@@ -64,7 +61,6 @@ namespace UniShare.Controllers
             return Ok(lab);
         }
 
-        // PUT: api/labs/update_lab/{labId}
         [HttpPut("update_lab/{labId}")]
         public async Task<IActionResult> UpdateLab(string labId, [FromBody] Lab updatedLab)
         {
@@ -85,7 +81,6 @@ namespace UniShare.Controllers
             return Ok(new { message = "Lab updated successfully" });
         }
 
-        // DELETE: api/labs/delete/{courseId}/{labId}
         [HttpDelete("delete/{courseId}/{labId}")]
         public async Task<IActionResult> DeleteLab(string courseId, string labId)
         {
