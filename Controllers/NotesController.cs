@@ -51,7 +51,7 @@ namespace UniShare.Controllers
             return Ok(new { notes });
         }
 
-        [HttpGet("{noteId}")]
+        [HttpGet("get_note/{noteId}")]
         public async Task<IActionResult> GetNote(string noteId)
         {
             var note = await _notes.Find(n => n.Id == noteId).FirstOrDefaultAsync();

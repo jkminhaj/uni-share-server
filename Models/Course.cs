@@ -50,6 +50,7 @@ namespace UniShare.Models
         [BsonElement("email")]
         public string? Email { get; set; }
 
+        [JsonPropertyName("notice")]    
         [BsonElement("notice")]
         public string? NoticeText { get; set; }
 

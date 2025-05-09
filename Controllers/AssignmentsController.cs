@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using UniShare.Models;
 using UniShare.Services;
@@ -71,7 +71,7 @@ namespace UniShare.Controllers
             return Ok(new { message = "Assignment updated successfully" });
         }
 
-        [HttpGet("{assignmentId}")]
+        [HttpGet("get_assignment/{assignmentId}")]
         public async Task<IActionResult> GetAssignment(string assignmentId)
         {
             var assignment = await _assignments.Find(a => a.Id == assignmentId).FirstOrDefaultAsync();

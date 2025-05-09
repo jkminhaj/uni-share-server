@@ -51,7 +51,7 @@ namespace UniShare.Controllers
             return Ok(new { labs });
         }
 
-        [HttpGet("{labId}")]
+        [HttpGet("get_lab/{labId}")]
         public async Task<IActionResult> GetLab(string labId)
         {
             var lab = await _labs.Find(l => l.Id == labId).FirstOrDefaultAsync();
