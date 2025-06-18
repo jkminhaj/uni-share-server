@@ -9,7 +9,6 @@ This API provides functionality for managing Courses, Assignments, Labs, and Not
 - **Labs:** `/api/labs`
 - **Notes:** `/api/notes`
 ---
-
 ##  Courses
 
 ### ➕ Create Course
