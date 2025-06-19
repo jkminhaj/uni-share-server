@@ -1,5 +1,6 @@
 #  Course Management API
 
+
 This API provides functionality for managing Courses, Assignments, Labs, and Notes in an academic setting.
 
 ##  Base URLs
